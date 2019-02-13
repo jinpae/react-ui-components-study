@@ -1,7 +1,5 @@
 import React from 'react';
 
-const TabPanel = ({ selected, children }) => {
-  return selected ? <div>{children}</div> : null;
-};
+const TabPanel = ({ children }) => <div className="tab-panel">{children}</div>;
 
 export default TabPanel;
