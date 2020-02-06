@@ -22,13 +22,15 @@ class App extends Component {
           >
             <TabList>
               <Tab>Tab 1</Tab>
-              <Tab disabled>Tab 2</Tab>
-              <Tab>Tab 3</Tab>
+              <Tab>Tab 2</Tab>
+              <Tab disabled>Tab 3</Tab>
+              <Tab>Tab 4</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>One</TabPanel>
               <TabPanel>Two</TabPanel>
               <TabPanel>Three</TabPanel>
+              <TabPanel>Four</TabPanel>
             </TabPanels>
           </TabView>
         </header>
