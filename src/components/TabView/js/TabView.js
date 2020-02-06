@@ -1,29 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import TabContext from '../../../contexts/TabContext';
 
-export default class TabView extends React.Component {
-  state = {
-    selectedIndex: 0
+function TabView({ children, onChange }) {
+  const [tabs, setTabs] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handleChange = index => {
+    setSelectedIndex(index);
+    onChange(index);
   };
 
-  static defaultProps = {
-    onSelect: () => {}
-  };
-
-  handleSelect = index => {
-    this.setState({ selectedIndex: index });
-    this.props.onSelect(index);
-  };
-
-  render() {
-    const { selectedIndex } = this.state;
-
-    const children = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, {
-        selectedIndex,
-        onSelect: this.handleSelect
-      });
-    });
-
-    return <div className="tab-view">{children}</div>;
-  }
+  return (
+    <TabContext.Provider
+      value={{ tabs, setTabs, selectedIndex, onChange: handleChange }}
+    >
+      <div className="tab-view">{children}</div>
+    </TabContext.Provider>
+  );
 }
+
+export default TabView;

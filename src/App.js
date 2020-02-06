@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import {
   TabView,
   TabList,
@@ -8,17 +7,16 @@ import {
   TabPanel
 } from './components/TabView';
 
+import './App.css';
+
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <p>React UI Components Study with Advanced Patterns</p>
-          <p>
-            1. <code>Tab</code> using <code>cloneElement</code>
-          </p>
+          <p>Tab Component Example</p>
           <TabView
-            onSelect={selectedIndex =>
+            onChange={selectedIndex =>
               console.log('Selected tab index', selectedIndex)
             }
           >
