@@ -1,14 +1,10 @@
 import React from 'react';
+import classNames from 'classnames';
 
-export const TabList = ({ selectedIndex, onSelect, children }) => {
-  const tabs = React.Children.map(children, (child, index) => {
-    return React.cloneElement(child, {
-      selected: selectedIndex === index,
-      onSelect: () => onSelect(index)
-    });
-  });
+export const TabList = ({ className, children }) => {
+  const tabListClassNames = classNames(className, 'tab-list');
 
-  return <div className="tab-list">{tabs}</div>;
+  return <div className={tabListClassNames}>{children}</div>;
 };
 
 export default TabList;
