@@ -8,6 +8,7 @@ import {
 } from './components/TabView';
 
 import './App.css';
+import Accordion from './components/Accordion/Accordion';
 
 class App extends Component {
   render() {
@@ -33,6 +34,8 @@ class App extends Component {
               <TabPanel>Four</TabPanel>
             </TabPanels>
           </TabView>
+          <p>Accordion Component Example</p>
+          <Accordion>Accordion Placeholder</Accordion>
         </header>
       </div>
     );
