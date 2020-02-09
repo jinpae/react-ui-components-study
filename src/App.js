@@ -6,16 +6,16 @@ import {
   TabPanels,
   TabPanel
 } from './components/TabView';
+import Accordion from './components/Accordion/Accordion';
 
 import './App.css';
-import Accordion from './components/Accordion/Accordion';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <p>Tab Component Example</p>
+          <p>Tab</p>
           <TabView
             onChange={selectedIndex =>
               console.log('Selected tab index', selectedIndex)
@@ -34,8 +34,13 @@ class App extends Component {
               <TabPanel>Four</TabPanel>
             </TabPanels>
           </TabView>
-          <p>Accordion Component Example</p>
-          <Accordion>Accordion Placeholder</Accordion>
+          <p>Accordion</p>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>Section 1</Accordion.Header>
+              <Accordion.Contents>Section 1 content</Accordion.Contents>
+            </Accordion.Item>
+          </Accordion>
         </header>
       </div>
     );
