@@ -38,7 +38,7 @@ class App extends Component {
           <Accordion>
             <Accordion.Item>
               <Accordion.Header>Section 1</Accordion.Header>
-              <Accordion.Contents>Section 1 content</Accordion.Contents>
+              <Accordion.Panel>Section 1 content</Accordion.Panel>
             </Accordion.Item>
           </Accordion>
         </header>
