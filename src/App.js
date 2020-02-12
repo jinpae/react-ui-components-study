@@ -18,7 +18,7 @@ class App extends Component {
           <p>Tab</p>
           <TabView
             onChange={selectedIndex =>
-              console.log('Selected tab index', selectedIndex)
+              console.log(`[Tab] onChange: selectedIndex: ${selectedIndex}`)
             }
           >
             <TabList>
@@ -35,10 +35,20 @@ class App extends Component {
             </TabPanels>
           </TabView>
           <p>Accordion</p>
-          <Accordion>
+          <Accordion
+            onChange={selectedIndex =>
+              console.log(
+                `[ACCORDION] onChange: selectedIndex: ${selectedIndex}`
+              )
+            }
+          >
             <Accordion.Item>
-              <Accordion.Header>Section 1</Accordion.Header>
-              <Accordion.Panel>Section 1 content</Accordion.Panel>
+              <Accordion.Header>Header 1</Accordion.Header>
+              <Accordion.Panel>Panel 1 content</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item>
+              <Accordion.Header>Header 2</Accordion.Header>
+              <Accordion.Panel>Panel 2 content</Accordion.Panel>
             </Accordion.Item>
           </Accordion>
         </header>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import AccordionContext from '../../contexts/AccordionContext';
 
 /*
@@ -22,10 +22,30 @@ import AccordionContext from '../../contexts/AccordionContext';
  * </Accordion>
  */
 
-const Accordion = ({ children }) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+const Accordion = ({ children, onChange }) => {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [headers, setHeaders] = useState([]);
+  const [panels, setPanels] = useState([]);
 
-  return <div className="accordion">{children}</div>;
+  const handleClick = index => {
+    setSelectedIndex(index);
+    onChange(index);
+  };
+
+  return (
+    <AccordionContext.Provider
+      value={{
+        selectedIndex,
+        onClick: handleClick,
+        headers,
+        setHeaders,
+        panels,
+        setPanels
+      }}
+    >
+      <div className="accordion">{children}</div>
+    </AccordionContext.Provider>
+  );
 };
 
 const Item = ({ children }) => {
@@ -33,13 +53,49 @@ const Item = ({ children }) => {
 };
 
 const Header = ({ children }) => {
-  return <button className="accordion-header">{children}</button>;
+  const ref = useRef();
+  const { headers, setHeaders, onClick } = useContext(AccordionContext);
+  const index = headers.findIndex(header => header === ref.current);
+
+  useEffect(() => {
+    setHeaders(headers => headers.concat(ref.current));
+
+    return () => {
+      setHeaders(headers => headers.filter(header => header !== ref.current));
+    };
+  }, []);
+
+  return (
+    <button
+      ref={ref}
+      className="accordion-header"
+      onClick={() => onClick(index)}
+    >
+      {children}
+    </button>
+  );
 };
 
 const Panel = ({ children }) => {
-  const { show } = useContext(AccordionContext);
+  const ref = useRef();
+  const { selectedIndex, panels, setPanels } = useContext(AccordionContext);
+  const index = panels.findIndex(panel => panel === ref.current);
 
-  return show && <div className="accordion-contents">{children}</div>;
+  useEffect(() => {
+    setPanels(panels => panels.concat(ref.current));
+
+    return () => setPanels(panel => panels.filter(panel !== ref.current));
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="accordion-contents"
+      hidden={index !== selectedIndex}
+    >
+      {children}
+    </div>
+  );
 };
 
 Accordion.Item = Item;

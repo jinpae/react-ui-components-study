@@ -11,8 +11,6 @@ function TabView({ children, onChange }) {
     onChange(index);
   };
 
-  console.log('tabPanels', tabPanels);
-
   return (
     <TabContext.Provider
       value={{
